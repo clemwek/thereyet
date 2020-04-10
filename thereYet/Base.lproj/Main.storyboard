@@ -49,7 +49,7 @@
         <scene sceneID="QWs-gE-AYB">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L94-LT-ZiN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController id="hAU-5p-6J5" sceneMemberID="viewController">
+                <viewController id="hAU-5p-6J5" customClass="TrackListViewController" customModule="thereYet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="480-AA-HU7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,7 +58,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="CkQ-xj-vIk">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="trackListCell" id="CkQ-xj-vIk">
                                         <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CkQ-xj-vIk" id="jJD-zq-wAP">
@@ -67,6 +67,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="hAU-5p-6J5" id="SWT-92-0Qr"/>
+                                    <outlet property="delegate" destination="hAU-5p-6J5" id="LfJ-95-mkq"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -80,6 +84,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="TrackList" image="square.and.pencil" catalog="system" id="MdV-Cg-umg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="trackTable" destination="WIH-fU-gV3" id="Q1Y-g7-7If"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1913.0434782608697" y="1062.7232142857142"/>
