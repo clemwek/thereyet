@@ -6,18 +6,17 @@
 //  Copyright © 2020 ddhwty. All rights reserved.
 //
 
-import CoreLocation
 import MapKit
 import UIKit
 import UserNotifications
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var search: UISearchBar!
     @IBOutlet weak var mapView: MKMapView!
     var locationManager: CLLocationManager?
-    let center = UNUserNotificationCenter.current()
     var location: CLLocation?
+    var currentLoc: CLLocation!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,18 +24,33 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
-
+        
         locationManager?.startUpdatingLocation()
-
-        center.requestAuthorization(options: [.alert, .sound]) { (granted, error) in
-            print ("permision was: ", granted)
+        
+        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == .authorizedAlways) {
+            
+            currentLoc = locationManager?.location
+            let region = MKCoordinateRegion(center: currentLoc.coordinate,
+                                            latitudinalMeters: 50000,
+                                            longitudinalMeters: 60000)
+            mapView.setCameraBoundary(
+              MKMapView.CameraBoundary(coordinateRegion: region),
+              animated: true)
+            
+            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+            mapView.setCameraZoomRange(zoomRange, animated: true)
         }
+        
+        mapView.centerToLocation(currentLoc)
     }
+}
 
+extension ViewController: CLLocationManagerDelegate {
+    
     //Write the didUpdateLocations method here:
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations[locations.count - 1]
-        print("location ------->>>>: ", location)
         if let location = location,
             location.horizontalAccuracy > 0 {
             locationManager?.stopUpdatingLocation()
@@ -48,3 +62,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print("There was an error: ", error)
     }
 }
+
+private extension MKMapView {
+    func centerToLocation(
+        _ location: CLLocation,
+        regionRadius: CLLocationDistance = 1000
+    ) {
+        let coordinateRegion = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius)
+        setRegion(coordinateRegion, animated: true)
+    }
+}
+

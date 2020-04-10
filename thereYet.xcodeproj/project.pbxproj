@@ -15,7 +15,6 @@
 		B31BDFBE242F74A90013C8A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B31BDFBC242F74A90013C8A3 /* LaunchScreen.storyboard */; };
 		B31BDFC9242F74A90013C8A3 /* thereYetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31BDFC8242F74A90013C8A3 /* thereYetTests.swift */; };
 		B31BDFD4242F74A90013C8A3 /* thereYetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31BDFD3242F74A90013C8A3 /* thereYetUITests.swift */; };
-		B3B5EF1624403C5600F8017B /* Locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5EF1524403C5600F8017B /* Locator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		B31BDFCF242F74A90013C8A3 /* thereYetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = thereYetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31BDFD3242F74A90013C8A3 /* thereYetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thereYetUITests.swift; sourceTree = "<group>"; };
 		B31BDFD5242F74A90013C8A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B3B5EF1524403C5600F8017B /* Locator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +106,6 @@
 				B31BDFBA242F74A90013C8A3 /* Assets.xcassets */,
 				B31BDFBC242F74A90013C8A3 /* LaunchScreen.storyboard */,
 				B31BDFBF242F74A90013C8A3 /* Info.plist */,
-				B3B5EF1524403C5600F8017B /* Locator.swift */,
 			);
 			path = thereYet;
 			sourceTree = "<group>";
@@ -262,7 +259,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3B5EF1624403C5600F8017B /* Locator.swift in Sources */,
 				B31BDFB6242F74A60013C8A3 /* ViewController.swift in Sources */,
 				B31BDFB2242F74A60013C8A3 /* AppDelegate.swift in Sources */,
 				B31BDFB4242F74A60013C8A3 /* SceneDelegate.swift in Sources */,
