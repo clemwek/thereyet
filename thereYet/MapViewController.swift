@@ -24,12 +24,12 @@ class MapViewController: UIViewController {
         locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
-        
+
         locationManager?.startUpdatingLocation()
-        
+
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == .authorizedAlways) {
-            
+
             currentLoc = locationManager?.location
             let region = MKCoordinateRegion(center: currentLoc.coordinate,
                                             latitudinalMeters: 50000,
@@ -37,17 +37,17 @@ class MapViewController: UIViewController {
             mapView.setCameraBoundary(
               MKMapView.CameraBoundary(coordinateRegion: region),
               animated: true)
-            
+
             let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
             mapView.setCameraZoomRange(zoomRange, animated: true)
         }
-        
+
         mapView.centerToLocation(currentLoc)
     }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
-    
+
     //Write the didUpdateLocations method here:
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         location = locations[locations.count - 1]
@@ -75,4 +75,3 @@ private extension MKMapView {
         setRegion(coordinateRegion, animated: true)
     }
 }
-
