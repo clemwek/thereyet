@@ -28,13 +28,16 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Setup location manager and request for permisions track user location
         locationManager = CLLocationManager()
         locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
 
+        // Start tracking location
         locationManager?.startUpdatingLocation()
 
+        //  Show current location in map
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
             CLLocationManager.authorizationStatus() == .authorizedAlways) {
 
@@ -52,6 +55,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
             mapView.centerToLocation(currentLoc)
         }
 
+        // Setup the search table
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
@@ -132,18 +136,9 @@ extension MapViewController: HandleMapSearch {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
-            switch action.style {
-                case .cancel:
-                    print("Tapped cancel ------>>>>>")
-                case .default:
-                    print("Tapped default ------>>>>>")
-                    Places.shared.placeList.append(place)
-                case .destructive:
-                    print("This is an imposible case")
-                }
-            
+            Places.shared.placeList.append(place)
         }))
-        
+
         self.present(alertController, animated: true, completion: nil)
     }
 }
