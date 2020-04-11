@@ -41,7 +41,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "trackListCell", for: indexPath)
-        cell.textLabel?.text = places.placeList[indexPath.row].placemark.name
+        cell.textLabel?.text = places.placeList[indexPath.row].placemark.name ?? "Unknown place"
         return cell
     }
 

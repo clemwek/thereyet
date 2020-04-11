@@ -17,14 +17,14 @@ protocol HandleMapSearch {
 }
 
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     var currentLoc: CLLocation!
     var location: CLLocation?
     var locationManager: CLLocationManager?
     var resultSearchController: UISearchController? = nil
-    var selectedPin:MKPlacemark? = nil
+    var selectedPin: MKPlacemark? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +68,25 @@ class MapViewController: UIViewController {
         locationSearchTable.mapView = mapView
 
         locationSearchTable.handleMapSearchDelegate = self
+
+        // Add gesture information
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        gestureRecognizer.delegate = self
+        mapView.addGestureRecognizer(gestureRecognizer)
+    }
+
+    @objc
+    func handleTap(_ gestureReconizer: UILongPressGestureRecognizer) {
+
+        let location = gestureReconizer.location(in: mapView)
+        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
+        let selectedPlace = MKPlacemark(coordinate: coordinate)
+        showAlert(place: MKMapItem(placemark: selectedPlace))
+
+        // Add annotation:
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
     }
 }
 
@@ -114,14 +133,15 @@ extension MapViewController: HandleMapSearch {
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             switch action.style {
-            case .cancel:
-                print("Tapped cancel ------>>>>>")
-            case .default:
-                print("Tapped default ------>>>>>")
-                Places.shared.placeList.append(place)
-            case .destructive:
-                print("This is an imposible case")
-            }
+                case .cancel:
+                    print("Tapped cancel ------>>>>>")
+                case .default:
+                    print("Tapped default ------>>>>>")
+                    Places.shared.placeList.append(place)
+                case .destructive:
+                    print("This is an imposible case")
+                }
+            
         }))
         
         self.present(alertController, animated: true, completion: nil)
@@ -154,4 +174,6 @@ extension MapViewController : MKMapViewDelegate {
         pinView?.canShowCallout = true
         return pinView
     }
+    
+    
 }
