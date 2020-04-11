@@ -12,7 +12,8 @@ import UserNotifications
 
 
 protocol HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark)
+    func dropPinZoomIn(placemark: MKPlacemark)
+    func showAlert(place: MKMapItem)
 }
 
 
@@ -88,7 +89,7 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: HandleMapSearch {
-    func dropPinZoomIn(placemark:MKPlacemark) {
+    func dropPinZoomIn(placemark: MKPlacemark) {
         // cache the pin
         selectedPin = placemark
         // clear existing pins
@@ -101,9 +102,29 @@ extension MapViewController: HandleMapSearch {
             annotation.subtitle = "\(city) \(state)"
         }
         mapView.addAnnotation(annotation)
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
         mapView.setRegion(region, animated: true)
+    }
+
+    func showAlert(place: MKMapItem) {
+        let alertController = UIAlertController(title: "Do you what to save this location",
+                                                message: "If you save this location you will be notified when enter the region of a 1Km radius",
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
+            switch action.style {
+            case .cancel:
+                print("Tapped cancel ------>>>>>")
+            case .default:
+                print("Tapped default ------>>>>>")
+                Places.shared.placeList.append(place)
+            case .destructive:
+                print("This is an imposible case")
+            }
+        }))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 

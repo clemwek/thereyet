@@ -11,17 +11,16 @@ import UIKit
 class TrackListViewController: UIViewController {
 
     @IBOutlet weak var trackTable: UITableView!
-    
-    var places: [String] = []
-    
+
+    var places = Places.shared
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        places = ["test", "test1", "test2", "test3", "test4"]
     }
     
-    
-    
+    override func viewDidAppear(_ animated: Bool) {
+        trackTable.reloadData()
+    }
 
     /*
     // MARK: - Navigation
@@ -37,24 +36,23 @@ class TrackListViewController: UIViewController {
 
 extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places.count
+        return places.placeList.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "trackListCell", for: indexPath)
-        cell.textLabel?.text = places[indexPath.row]
+        cell.textLabel?.text = places.placeList[indexPath.row].placemark.name
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            places.remove(at: indexPath.row)
+            places.placeList.remove(at: indexPath.row)
             tableView.reloadData()
         }
     }
-    
 }
