@@ -21,7 +21,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     var currentLoc: CLLocation!
-    var location: CLLocation?
     var locationManager: CLLocationManager?
     var resultSearchController: UISearchController? = nil
     var selectedPin: MKPlacemark? = nil
@@ -30,7 +29,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         // Setup location manager and request for permisions track user location
         locationManager = CLLocationManager()
-        locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.delegate = self
         locationManager?.requestAlwaysAuthorization()
 
@@ -46,8 +45,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
                                             latitudinalMeters: 50000,
                                             longitudinalMeters: 60000)
             mapView.setCameraBoundary(
-              MKMapView.CameraBoundary(coordinateRegion: region),
-              animated: true)
+                MKMapView.CameraBoundary(coordinateRegion: region),
+                animated: true)
 
             let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
             mapView.setCameraZoomRange(zoomRange, animated: true)
@@ -92,13 +91,36 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
     }
+    
+    func setLocalNotification(place: MKMapItem) {
+        let content = UNMutableNotificationContent()
+        content.title = "Bingo"
+        content.body = "You have entered designated area"
+        content.sound = .default
+
+        let center = place.placemark.coordinate
+        let region = CLCircularRegion(center: center, radius: 500.0, identifier: "New place")
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
+
+        let request = UNNotificationRequest(identifier: "destAlarm", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error == nil {
+                print("Successful notification")
+            } else {
+                print(error ?? "Error")
+            }
+        })
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
 
     //Write the didUpdateLocations method here:
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        location = locations[locations.count - 1]
+        let location: CLLocation? = locations[locations.count - 1]
         if let location = location,
             location.horizontalAccuracy > 0 {
             locationManager?.stopUpdatingLocation()
@@ -121,7 +143,7 @@ extension MapViewController: HandleMapSearch {
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
         if let city = placemark.locality,
-        let state = placemark.administrativeArea {
+            let state = placemark.administrativeArea {
             annotation.subtitle = "\(city) \(state)"
         }
         mapView.addAnnotation(annotation)
@@ -137,6 +159,7 @@ extension MapViewController: HandleMapSearch {
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             Places.shared.placeList.append(place)
+            self.setLocalNotification(place: place)
         }))
 
         self.present(alertController, animated: true, completion: nil)
@@ -169,6 +192,4 @@ extension MapViewController : MKMapViewDelegate {
         pinView?.canShowCallout = true
         return pinView
     }
-    
-    
 }
