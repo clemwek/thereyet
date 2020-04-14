@@ -53,6 +53,7 @@
 		B31BDFD3242F74A90013C8A3 /* thereYetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thereYetUITests.swift; sourceTree = "<group>"; };
 		B31BDFD5242F74A90013C8A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B32A6AE52441AC800068943F /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
+		B32A6AE72444DEF50068943F /* thereYet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = thereYet.entitlements; sourceTree = "<group>"; };
 		B39082B42440F3CF008A3310 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +106,7 @@
 		B31BDFB0242F74A60013C8A3 /* thereYet */ = {
 			isa = PBXGroup;
 			children = (
+				B32A6AE72444DEF50068943F /* thereYet.entitlements */,
 				B31BDFB1242F74A60013C8A3 /* AppDelegate.swift */,
 				B31BDFB3242F74A60013C8A3 /* SceneDelegate.swift */,
 				B31BDFB5242F74A60013C8A3 /* MapViewController.swift */,
@@ -446,6 +448,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = thereYet/thereYet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = thereYet/Info.plist;
@@ -464,6 +467,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = thereYet/thereYet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = thereYet/Info.plist;
