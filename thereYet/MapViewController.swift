@@ -91,7 +91,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
     }
-    
+
     func setLocalNotification(place: MKMapItem) {
         let content = UNMutableNotificationContent()
         content.title = "Bingo"
@@ -117,7 +117,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 }
 
 extension MapViewController: CLLocationManagerDelegate {
-
     //Write the didUpdateLocations method here:
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation? = locations[locations.count - 1]

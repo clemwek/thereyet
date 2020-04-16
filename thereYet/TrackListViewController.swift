@@ -31,7 +31,6 @@ class TrackListViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {

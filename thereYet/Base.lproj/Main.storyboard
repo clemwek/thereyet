@@ -35,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2823.1884057971015" y="293.97321428571428"/>
+            <point key="canvasLocation" x="2683" y="294"/>
         </scene>
         <!--Location Search Table-->
         <scene sceneID="vfs-WE-fxp">
@@ -79,7 +79,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IgJ-ga-PtA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3681.1594202898555" y="293.97321428571428"/>
+            <point key="canvasLocation" x="3436" y="301"/>
         </scene>
         <!--TrackList-->
         <scene sceneID="QWs-gE-AYB">
