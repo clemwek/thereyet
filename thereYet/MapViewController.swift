@@ -24,6 +24,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     var locationManager: CLLocationManager?
     var resultSearchController: UISearchController? = nil
     var selectedPin: MKPlacemark? = nil
+    let veiwModel = MapViewViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,29 +92,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
     }
-
-    func setLocalNotification(place: MKMapItem) {
-        let content = UNMutableNotificationContent()
-        content.title = "Bingo"
-        content.body = "You have entered designated area"
-        content.sound = .default
-
-        let center = place.placemark.coordinate
-        let region = CLCircularRegion(center: center, radius: 500.0, identifier: "New place")
-        region.notifyOnEntry = true
-        region.notifyOnExit = false
-
-        let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
-
-        let request = UNNotificationRequest(identifier: "destAlarm", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
-            if error == nil {
-                print("Successful notification")
-            } else {
-                print(error ?? "Error")
-            }
-        })
-    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -158,7 +136,7 @@ extension MapViewController: HandleMapSearch {
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             Places.shared.placeList.append(place)
-            self.setLocalNotification(place: place)
+            self.veiwModel.setLocalNotification(place: place)
         }))
 
         self.present(alertController, animated: true, completion: nil)

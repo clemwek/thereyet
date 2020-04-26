@@ -111,6 +111,7 @@
 				B32A6AE72444DEF50068943F /* thereYet.entitlements */,
 				B31BDFB1242F74A60013C8A3 /* AppDelegate.swift */,
 				B31BDFB5242F74A60013C8A3 /* MapViewController.swift */,
+				B3642682244E62D600071E6B /* MapViewViewModel.swift */,
 				B31BDFB7242F74A60013C8A3 /* Main.storyboard */,
 				B39082B42440F3CF008A3310 /* LocationSearchTable.swift */,
 				B31BDFBA242F74A90013C8A3 /* Assets.xcassets */,
@@ -119,7 +120,6 @@
 				B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */,
 				B32A6AE52441AC800068943F /* Places.swift */,
 				B3642680244E5F1100071E6B /* SceneDelegate.swift */,
-				B3642682244E62D600071E6B /* MapViewViewModel.swift */,
 			);
 			path = thereYet;
 			sourceTree = "<group>";
