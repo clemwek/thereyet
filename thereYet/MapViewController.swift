@@ -6,6 +6,7 @@
 //  Copyright © 2020 ddhwty. All rights reserved.
 //
 
+import CoreData
 import MapKit
 import UIKit
 import UserNotifications
@@ -92,6 +93,33 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         annotation.coordinate = coordinate
         mapView.addAnnotation(annotation)
     }
+
+    func save(place: CLLocationCoordinate2D) {
+
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Location",
+                                       in: managedContext)!
+
+        let location = NSManagedObject(entity: entity,
+                                     insertInto: managedContext)
+
+        location.setValue(place.latitude, forKeyPath: "latitude")
+        location.setValue(place.longitude, forKeyPath: "longitude")
+
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -135,8 +163,9 @@ extension MapViewController: HandleMapSearch {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
-            Places.shared.placeList.append(place)
+
             self.veiwModel.setLocalNotification(place: place)
+            self.save(place: place.placemark.coordinate)
         }))
 
         self.present(alertController, animated: true, completion: nil)

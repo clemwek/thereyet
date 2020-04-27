@@ -6,18 +6,43 @@
 //  Copyright © 2020 ddhwty. All rights reserved.
 //
 
+import CoreData
 import UIKit
+import CoreLocation
 
 class TrackListViewController: UIViewController {
 
     @IBOutlet weak var trackTable: UITableView!
 
-    var places = Places.shared
+//    var places = Places.shared
+    var places: [NSManagedObject] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Location")
+
+        do {
+            places = try managedContext.fetch(fetchRequest)
+            trackTable.reloadData()
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         trackTable.reloadData()
     }
@@ -35,12 +60,14 @@ class TrackListViewController: UIViewController {
 
 extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return places.placeList.count
+        return places.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let place = places[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "trackListCell", for: indexPath)
-        cell.textLabel?.text = places.placeList[indexPath.row].placemark.name ?? "Unknown place"
+        cell.textLabel?.text = "\(String(describing: place.value(forKey: "longitude")!)), \(String(describing: place.value(forKey: "latitude")!))"
+        cell.detailTextLabel?.text = "some text comes here"
         return cell
     }
 
@@ -50,7 +77,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            places.placeList.remove(at: indexPath.row)
+            places.remove(at: indexPath.row)
             tableView.reloadData()
         }
     }

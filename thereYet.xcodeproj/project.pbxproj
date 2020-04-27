@@ -18,6 +18,10 @@
 		B3642681244E5F1100071E6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3642680244E5F1100071E6B /* SceneDelegate.swift */; };
 		B3642683244E62D600071E6B /* MapViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3642682244E62D600071E6B /* MapViewViewModel.swift */; };
 		B39082B52440F3CF008A3310 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39082B42440F3CF008A3310 /* LocationSearchTable.swift */; };
+		B3963CE62455A026009E1094 /* thereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE42455A026009E1094 /* thereYet.xcdatamodeld */; };
+		B3963CE92455A2B4009E1094 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */; };
+		B3963CEA2455A2B4009E1094 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE82455A2B4009E1094 /* Location+CoreDataProperties.swift */; };
+		B3963CEC2455C2B2009E1094 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */; };
 		B3B5EF1E2440D2A500F8017B /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +61,10 @@
 		B3642680244E5F1100071E6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B3642682244E62D600071E6B /* MapViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewViewModel.swift; sourceTree = "<group>"; };
 		B39082B42440F3CF008A3310 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		B3963CE52455A026009E1094 /* thereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = thereYet.xcdatamodel; sourceTree = "<group>"; };
+		B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B3963CE82455A2B4009E1094 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
 		B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +96,8 @@
 		B31BDFA5242F74A60013C8A3 = {
 			isa = PBXGroup;
 			children = (
+				B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */,
+				B3963CE82455A2B4009E1094 /* Location+CoreDataProperties.swift */,
 				B31BDFB0242F74A60013C8A3 /* thereYet */,
 				B31BDFC7242F74A90013C8A3 /* thereYetTests */,
 				B31BDFD2242F74A90013C8A3 /* thereYetUITests */,
@@ -108,6 +118,7 @@
 		B31BDFB0242F74A60013C8A3 /* thereYet */ = {
 			isa = PBXGroup;
 			children = (
+				B3963CE324559F9E009E1094 /* Resources */,
 				B32A6AE72444DEF50068943F /* thereYet.entitlements */,
 				B31BDFB1242F74A60013C8A3 /* AppDelegate.swift */,
 				B31BDFB5242F74A60013C8A3 /* MapViewController.swift */,
@@ -120,6 +131,7 @@
 				B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */,
 				B32A6AE52441AC800068943F /* Places.swift */,
 				B3642680244E5F1100071E6B /* SceneDelegate.swift */,
+				B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */,
 			);
 			path = thereYet;
 			sourceTree = "<group>";
@@ -140,6 +152,14 @@
 				B31BDFD5242F74A90013C8A3 /* Info.plist */,
 			);
 			path = thereYetUITests;
+			sourceTree = "<group>";
+		};
+		B3963CE324559F9E009E1094 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B3963CE42455A026009E1094 /* thereYet.xcdatamodeld */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,9 +297,13 @@
 				B39082B52440F3CF008A3310 /* LocationSearchTable.swift in Sources */,
 				B3642683244E62D600071E6B /* MapViewViewModel.swift in Sources */,
 				B31BDFB6242F74A60013C8A3 /* MapViewController.swift in Sources */,
+				B3963CEA2455A2B4009E1094 /* Location+CoreDataProperties.swift in Sources */,
 				B31BDFB2242F74A60013C8A3 /* AppDelegate.swift in Sources */,
+				B3963CEC2455C2B2009E1094 /* CoreDataClient.swift in Sources */,
 				B32A6AE62441AC800068943F /* Places.swift in Sources */,
+				B3963CE92455A2B4009E1094 /* Location+CoreDataClass.swift in Sources */,
 				B3642681244E5F1100071E6B /* SceneDelegate.swift in Sources */,
+				B3963CE62455A026009E1094 /* thereYet.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -606,6 +630,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B3963CE42455A026009E1094 /* thereYet.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B3963CE52455A026009E1094 /* thereYet.xcdatamodel */,
+			);
+			currentVersion = B3963CE52455A026009E1094 /* thereYet.xcdatamodel */;
+			path = thereYet.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B31BDFA6242F74A60013C8A3 /* Project object */;
 }
