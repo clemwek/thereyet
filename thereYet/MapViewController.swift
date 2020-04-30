@@ -39,22 +39,22 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         locationManager?.startUpdatingLocation()
 
         //  Show current location in map
-        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-            CLLocationManager.authorizationStatus() == .authorizedAlways) {
-
-            currentLoc = locationManager?.location
-            let region = MKCoordinateRegion(center: currentLoc.coordinate,
-                                            latitudinalMeters: 50000,
-                                            longitudinalMeters: 60000)
-            mapView.setCameraBoundary(
-                MKMapView.CameraBoundary(coordinateRegion: region),
-                animated: true)
-
-            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
-            mapView.setCameraZoomRange(zoomRange, animated: true)
-
-            mapView.centerToLocation(currentLoc)
-        }
+//        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+//            CLLocationManager.authorizationStatus() == .authorizedAlways) {
+//
+//            currentLoc = locationManager?.location
+//            let region = MKCoordinateRegion(center: currentLoc.coordinate,
+//                                            latitudinalMeters: 50000,
+//                                            longitudinalMeters: 60000)
+//            mapView.setCameraBoundary(
+//                MKMapView.CameraBoundary(coordinateRegion: region),
+//                animated: true)
+//
+//            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+//            mapView.setCameraZoomRange(zoomRange, animated: true)
+//
+//            mapView.centerToLocation(currentLoc)
+//        }
 
         // Setup the search table
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
@@ -87,7 +87,9 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
         let selectedPlace = MKPlacemark(coordinate: coordinate)
         showAlert(place: MKMapItem(placemark: selectedPlace))
-
+    }
+    
+    func addAnnotation(coordinate: CLLocationCoordinate2D) {
         // Add annotation:
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
@@ -125,9 +127,11 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 extension MapViewController: CLLocationManagerDelegate {
     //Write the didUpdateLocations method here:
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location: CLLocation? = locations[locations.count - 1]
-        if let location = location,
+        if let location = locations.last,
             location.horizontalAccuracy > 0 {
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.mapView.setRegion(region, animated: true)
             locationManager?.stopUpdatingLocation()
         }
     }
@@ -163,8 +167,8 @@ extension MapViewController: HandleMapSearch {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
-
             self.veiwModel.setLocalNotification(place: place)
+            self.addAnnotation(coordinate: place.placemark.coordinate)
             self.save(place: place.placemark.coordinate)
         }))
 
