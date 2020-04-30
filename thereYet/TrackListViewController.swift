@@ -47,15 +47,11 @@ class TrackListViewController: UIViewController {
         trackTable.reloadData()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+         
     }
-    */
+
 }
 
 extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -69,6 +65,29 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = "\(String(describing: place.value(forKey: "longitude")!)), \(String(describing: place.value(forKey: "latitude")!))"
         cell.detailTextLabel?.text = "some text comes here"
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Saved Locations"
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let place = places[indexPath.row]
+        let location = CLLocation(latitude: place.value(forKey: "latitude")! as! CLLocationDegrees,
+                                              longitude: place.value(forKey: "longitude")! as! CLLocationDegrees)
+        let mapVC = MapViewController()
+        mapVC.currentLoc = location
+        let mapView = self.tabBarController?.viewControllers?[0] as? MapViewController
+        mapView?.currentLoc = location
+        
+        // TODO: Pass the selected location to the view controller
+
+        let tab = storyboard?.instantiateInitialViewController() as? TabView
+        tab?.selectedIndex = 1
+        tab?.selectedViewController = tab?.viewControllers?[0]
+        
+        present(tab!, animated: true, completion: nil)
+
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

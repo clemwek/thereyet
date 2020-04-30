@@ -22,6 +22,7 @@
 		B3963CE92455A2B4009E1094 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */; };
 		B3963CEA2455A2B4009E1094 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE82455A2B4009E1094 /* Location+CoreDataProperties.swift */; };
 		B3963CEC2455C2B2009E1094 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */; };
+		B3AD92E9245BF54900BEB009 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD92E8245BF54800BEB009 /* TabView.swift */; };
 		B3B5EF1E2440D2A500F8017B /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3963CE82455A2B4009E1094 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
+		B3AD92E8245BF54800BEB009 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -132,6 +134,7 @@
 				B32A6AE52441AC800068943F /* Places.swift */,
 				B3642680244E5F1100071E6B /* SceneDelegate.swift */,
 				B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */,
+				B3AD92E8245BF54800BEB009 /* TabView.swift */,
 			);
 			path = thereYet;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				B32A6AE62441AC800068943F /* Places.swift in Sources */,
 				B3963CE92455A2B4009E1094 /* Location+CoreDataClass.swift in Sources */,
 				B3642681244E5F1100071E6B /* SceneDelegate.swift in Sources */,
+				B3AD92E9245BF54900BEB009 /* TabView.swift in Sources */,
 				B3963CE62455A026009E1094 /* thereYet.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
