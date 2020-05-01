@@ -26,7 +26,7 @@ class MapViewViewModel {
         content.sound = .default
 
         let center = place.placemark.coordinate
-        let region = CLCircularRegion(center: center, radius: 500.0, identifier: "New place")
+        let region = CLCircularRegion(center: center, radius: 1000.0, identifier: "New place")
         region.notifyOnEntry = true
         region.notifyOnExit = false
 

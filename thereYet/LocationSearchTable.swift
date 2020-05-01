@@ -9,11 +9,11 @@
 import UIKit
 import MapKit
 
-class LocationSearchTable : UITableViewController {
+class LocationSearchTable: UITableViewController {
 
-    var matchingItems:[MKMapItem] = []
+    var matchingItems: [MKMapItem] = []
     var mapView: MKMapView? = nil
-    var handleMapSearchDelegate:HandleMapSearch? = nil
+    var handleMapSearchDelegate: HandleMapSearch? = nil
 
 }
 
@@ -39,7 +39,7 @@ extension LocationSearchTable {
     }
 }
 
-extension LocationSearchTable : UISearchResultsUpdating {
+extension LocationSearchTable: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let mapView = mapView,
             let searchBarText = searchController.searchBar.text else { return }

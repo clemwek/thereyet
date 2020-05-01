@@ -39,23 +39,58 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         locationManager?.startUpdatingLocation()
 
         //  Show current location in map
-//        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-//            CLLocationManager.authorizationStatus() == .authorizedAlways) {
-//
-//            currentLoc = locationManager?.location
-//            let region = MKCoordinateRegion(center: currentLoc.coordinate,
-//                                            latitudinalMeters: 50000,
-//                                            longitudinalMeters: 60000)
-//            mapView.setCameraBoundary(
-//                MKMapView.CameraBoundary(coordinateRegion: region),
-//                animated: true)
-//
-//            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
-//            mapView.setCameraZoomRange(zoomRange, animated: true)
-//
-//            mapView.centerToLocation(currentLoc)
-//        }
+        //        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+        //            CLLocationManager.authorizationStatus() == .authorizedAlways) {
+        //
+        //            currentLoc = locationManager?.location
+        //            let region = MKCoordinateRegion(center: currentLoc.coordinate,
+        //                                            latitudinalMeters: 50000,
+        //                                            longitudinalMeters: 60000)
+        //            mapView.setCameraBoundary(
+        //                MKMapView.CameraBoundary(coordinateRegion: region),
+        //                animated: true)
+        //
+        //            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+        //            mapView.setCameraZoomRange(zoomRange, animated: true)
+        //
+        //            mapView.centerToLocation(currentLoc)
+        //        }
+        
+        setupSearchTable()
 
+        // Add gesture information
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        gestureRecognizer.delegate = self
+        mapView.addGestureRecognizer(gestureRecognizer)
+        
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (requests) in
+
+            for request in requests {
+                
+                print("------------------->>>>>>>>>>>>>>", request)
+                
+                //                if request.identifier == "IDENTIFIER YOU'RE CHECKING IF EXISTS" {
+                //
+                //                    //Notification already exists. Do stuff.
+                //
+                //                } else if request === requests.last {
+                //
+                //                    //All requests have already been checked and notification with identifier wasn't found. Do stuff.
+                //
+                //                }
+            }
+        })
+    }
+
+    @objc
+    func handleTap(_ gestureReconizer: UILongPressGestureRecognizer) {
+        let location = gestureReconizer.location(in: mapView)
+        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
+        let selectedPlace = MKPlacemark(coordinate: coordinate)
+        showAlert(place: MKMapItem(placemark: selectedPlace))
+    }
+    
+    func setupSearchTable() {
         // Setup the search table
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
@@ -73,20 +108,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         locationSearchTable.mapView = mapView
 
         locationSearchTable.handleMapSearchDelegate = self
-
-        // Add gesture information
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-        gestureRecognizer.delegate = self
-        mapView.addGestureRecognizer(gestureRecognizer)
-    }
-
-    @objc
-    func handleTap(_ gestureReconizer: UILongPressGestureRecognizer) {
-
-        let location = gestureReconizer.location(in: mapView)
-        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
-        let selectedPlace = MKPlacemark(coordinate: coordinate)
-        showAlert(place: MKMapItem(placemark: selectedPlace))
     }
     
     func addAnnotation(coordinate: CLLocationCoordinate2D) {
@@ -111,7 +132,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
                                        in: managedContext)!
 
         let location = NSManagedObject(entity: entity,
-                                     insertInto: managedContext)
+                                       insertInto: managedContext)
 
         location.setValue(place.latitude, forKeyPath: "latitude")
         location.setValue(place.longitude, forKeyPath: "longitude")
@@ -135,7 +156,7 @@ extension MapViewController: CLLocationManagerDelegate {
             locationManager?.stopUpdatingLocation()
         }
     }
-
+    
     //Write the didFailWithError method here:
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("There was an error: ", error)
@@ -160,7 +181,7 @@ extension MapViewController: HandleMapSearch {
         let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
         mapView.setRegion(region, animated: true)
     }
-
+    
     func showAlert(place: MKMapItem) {
         let alertController = UIAlertController(title: "Do you what to save this location",
                                                 message: "If you save this location you will be notified when enter the region of a 1Km radius",
@@ -171,7 +192,7 @@ extension MapViewController: HandleMapSearch {
             self.addAnnotation(coordinate: place.placemark.coordinate)
             self.save(place: place.placemark.coordinate)
         }))
-
+        
         self.present(alertController, animated: true, completion: nil)
     }
 }
