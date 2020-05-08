@@ -84,12 +84,35 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @objc
     func handleTap(_ gestureReconizer: UILongPressGestureRecognizer) {
-        let location = gestureReconizer.location(in: mapView)
-        let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
-        let selectedPlace = MKPlacemark(coordinate: coordinate)
-        showAlert(place: MKMapItem(placemark: selectedPlace))
+        let cgLocation = gestureReconizer.location(in: mapView)
+        let coordinate = mapView.convert(cgLocation, toCoordinateFrom: mapView)
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+
+        lookUpCurrentLocation(location: location) { (placemark) in
+            if let placemark = placemark {
+                self.showAlert(place: MKMapItem(placemark: MKPlacemark(placemark: placemark)))
+            }
+        }
     }
-    
+
+    // This looks up the tapped location and adds description
+    func lookUpCurrentLocation(location: CLLocation, completionHandler: @escaping (CLPlacemark?) -> Void) {
+        let geocoder = CLGeocoder()
+
+        // Look up the location and pass it to the completion handler
+        geocoder.reverseGeocodeLocation(location,
+                                        completionHandler: { (placemarks, error) in
+                                            if error == nil {
+                                                let firstLocation = placemarks?[0]
+                                                completionHandler(firstLocation)
+                                            }
+                                            else {
+                                                // An error occurred during geocoding.
+                                                completionHandler(nil)
+                                            }
+        })
+    }
+
     func setupSearchTable() {
         // Setup the search table
         let locationSearchTable = storyboard!.instantiateViewController(withIdentifier: "LocationSearchTable") as! LocationSearchTable
@@ -109,7 +132,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
         locationSearchTable.handleMapSearchDelegate = self
     }
-    
+
     func addAnnotation(coordinate: CLLocationCoordinate2D) {
         // Add annotation:
         let annotation = MKPointAnnotation()
@@ -117,7 +140,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         mapView.addAnnotation(annotation)
     }
 
-    func save(place: CLLocationCoordinate2D) {
+    func save(place: MKPlacemark) {
 
         guard let appDelegate =
             UIApplication.shared.delegate as? AppDelegate else {
@@ -134,8 +157,9 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         let location = NSManagedObject(entity: entity,
                                        insertInto: managedContext)
 
-        location.setValue(place.latitude, forKeyPath: "latitude")
-        location.setValue(place.longitude, forKeyPath: "longitude")
+        location.setValue(place.coordinate.latitude, forKeyPath: "latitude")
+        location.setValue(place.coordinate.longitude, forKeyPath: "longitude")
+        location.setValue(self.parseAddress(selectedItem: place), forKey: "placeDescription")
 
         do {
             try managedContext.save()
@@ -190,10 +214,34 @@ extension MapViewController: HandleMapSearch {
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             self.veiwModel.setLocalNotification(place: place)
             self.addAnnotation(coordinate: place.placemark.coordinate)
-            self.save(place: place.placemark.coordinate)
+            self.save(place: place.placemark)
         }))
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func parseAddress(selectedItem: MKPlacemark) -> String {
+        // put a space between "4" and "Melrose Place"
+        let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
+        // put a comma between street and city/state
+        let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) && (selectedItem.subAdministrativeArea != nil || selectedItem.administrativeArea != nil) ? ", " : ""
+        // put a space between "Washington" and "DC"
+        let secondSpace = (selectedItem.subAdministrativeArea != nil && selectedItem.administrativeArea != nil) ? " " : ""
+        let addressLine = String(
+            format:"%@%@%@%@%@%@%@",
+            // street number
+            selectedItem.subThoroughfare ?? "",
+            firstSpace,
+            // street name
+            selectedItem.thoroughfare ?? "",
+            comma,
+            // city
+            selectedItem.locality ?? "",
+            secondSpace,
+            // state
+            selectedItem.administrativeArea ?? ""
+        )
+        return addressLine
     }
 }
 

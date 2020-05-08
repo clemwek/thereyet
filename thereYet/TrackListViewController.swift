@@ -61,9 +61,15 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let place = places[indexPath.row]
+        var description: String = ""
+        if place.value(forKey: "placeDescription") != nil {
+            description = String(describing: place.value(forKey: "placeDescription")!)
+        } else {
+            description = "No descripion"
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "trackListCell", for: indexPath)
         cell.textLabel?.text = "\(String(describing: place.value(forKey: "longitude")!)), \(String(describing: place.value(forKey: "latitude")!))"
-        cell.detailTextLabel?.text = "some text comes here"
+        cell.detailTextLabel?.text = description
         return cell
     }
 
