@@ -33,7 +33,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         locationManager = CLLocationManager()
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.delegate = self
-        locationManager?.requestAlwaysAuthorization()
+        locationManager?.requestWhenInUseAuthorization()
 
         // Start tracking location
         locationManager?.startUpdatingLocation()
@@ -140,6 +140,29 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         mapView.addAnnotation(annotation)
     }
 
+    func setLocalNotification(place: MKMapItem) {
+        let content = UNMutableNotificationContent()
+        content.title = "Bingo"
+        content.body = "You have entered designated area"
+        content.sound = .default
+
+        let center = place.placemark.coordinate
+        let region = CLCircularRegion(center: center, radius: 1000.0, identifier: "New place")
+        region.notifyOnEntry = true
+        region.notifyOnExit = false
+
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
+
+        let request = UNNotificationRequest(identifier: "\(String(describing: place.name!))", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
+            if error == nil {
+                print("Successful notification")
+            } else {
+                print(error ?? "Error")
+            }
+        })
+    }
+
     func save(place: MKPlacemark) {
 
         guard let appDelegate =
@@ -212,7 +235,7 @@ extension MapViewController: HandleMapSearch {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
-            self.veiwModel.setLocalNotification(place: place)
+            self.setLocalNotification(place: place)
             self.addAnnotation(coordinate: place.placemark.coordinate)
             self.save(place: place.placemark)
         }))
