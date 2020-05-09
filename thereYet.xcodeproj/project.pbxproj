@@ -16,7 +16,6 @@
 		B31BDFD4242F74A90013C8A3 /* thereYetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31BDFD3242F74A90013C8A3 /* thereYetUITests.swift */; };
 		B32A6AE62441AC800068943F /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32A6AE52441AC800068943F /* Places.swift */; };
 		B3642681244E5F1100071E6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3642680244E5F1100071E6B /* SceneDelegate.swift */; };
-		B3642683244E62D600071E6B /* MapViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3642682244E62D600071E6B /* MapViewViewModel.swift */; };
 		B39082B52440F3CF008A3310 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39082B42440F3CF008A3310 /* LocationSearchTable.swift */; };
 		B3963CE62455A026009E1094 /* thereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE42455A026009E1094 /* thereYet.xcdatamodeld */; };
 		B3963CE92455A2B4009E1094 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */; };
@@ -60,7 +59,6 @@
 		B32A6AE52441AC800068943F /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		B32A6AE72444DEF50068943F /* thereYet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = thereYet.entitlements; sourceTree = "<group>"; };
 		B3642680244E5F1100071E6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B3642682244E62D600071E6B /* MapViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewViewModel.swift; sourceTree = "<group>"; };
 		B39082B42440F3CF008A3310 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		B3963CE52455A026009E1094 /* thereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = thereYet.xcdatamodel; sourceTree = "<group>"; };
 		B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				B32A6AE72444DEF50068943F /* thereYet.entitlements */,
 				B31BDFB1242F74A60013C8A3 /* AppDelegate.swift */,
 				B31BDFB5242F74A60013C8A3 /* MapViewController.swift */,
-				B3642682244E62D600071E6B /* MapViewViewModel.swift */,
 				B31BDFB7242F74A60013C8A3 /* Main.storyboard */,
 				B39082B42440F3CF008A3310 /* LocationSearchTable.swift */,
 				B31BDFBA242F74A90013C8A3 /* Assets.xcassets */,
@@ -298,7 +295,6 @@
 			files = (
 				B3B5EF1E2440D2A500F8017B /* TrackListViewController.swift in Sources */,
 				B39082B52440F3CF008A3310 /* LocationSearchTable.swift in Sources */,
-				B3642683244E62D600071E6B /* MapViewViewModel.swift in Sources */,
 				B31BDFB6242F74A60013C8A3 /* MapViewController.swift in Sources */,
 				B3963CEA2455A2B4009E1094 /* Location+CoreDataProperties.swift in Sources */,
 				B31BDFB2242F74A60013C8A3 /* AppDelegate.swift in Sources */,

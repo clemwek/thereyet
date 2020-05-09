@@ -25,7 +25,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     var locationManager: CLLocationManager?
     var resultSearchController: UISearchController? = nil
     var selectedPin: MKPlacemark? = nil
-    let veiwModel = MapViewViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,24 +37,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         // Start tracking location
         locationManager?.startUpdatingLocation()
 
-        //  Show current location in map
-        //        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-        //            CLLocationManager.authorizationStatus() == .authorizedAlways) {
-        //
-        //            currentLoc = locationManager?.location
-        //            let region = MKCoordinateRegion(center: currentLoc.coordinate,
-        //                                            latitudinalMeters: 50000,
-        //                                            longitudinalMeters: 60000)
-        //            mapView.setCameraBoundary(
-        //                MKMapView.CameraBoundary(coordinateRegion: region),
-        //                animated: true)
-        //
-        //            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
-        //            mapView.setCameraZoomRange(zoomRange, animated: true)
-        //
-        //            mapView.centerToLocation(currentLoc)
-        //        }
-        
         setupSearchTable()
 
         // Add gesture information
@@ -143,17 +124,18 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
     func setLocalNotification(place: MKMapItem) {
         let content = UNMutableNotificationContent()
         content.title = "Bingo"
-        content.body = "You have entered designated area"
+        content.body = "You have entered \(String(describing: place.name!)) area"
         content.sound = .default
 
         let center = place.placemark.coordinate
-        let region = CLCircularRegion(center: center, radius: 1000.0, identifier: "New place")
+        let id = "\(place.placemark.coordinate.latitude),\(place.placemark.coordinate.longitude)"
+        let region = CLCircularRegion(center: center, radius: 500.0, identifier: id)
         region.notifyOnEntry = true
         region.notifyOnExit = false
 
         let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
 
-        let request = UNNotificationRequest(identifier: "\(String(describing: place.name!))", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in
             if error == nil {
                 print("Successful notification")
@@ -188,6 +170,25 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
             try managedContext.save()
         } catch let error as NSError {
             print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+
+    func showSelectedLocation(location: CLLocation) {
+        //  Show current location in map
+        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() == .authorizedAlways) {
+
+            let region = MKCoordinateRegion(center: location.coordinate,
+                                            latitudinalMeters: 50000,
+                                            longitudinalMeters: 60000)
+            mapView.setCameraBoundary(
+                MKMapView.CameraBoundary(coordinateRegion: region),
+                animated: true)
+
+            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+            mapView.setCameraZoomRange(zoomRange, animated: true)
+
+            mapView.centerToLocation(currentLoc)
         }
     }
 }
@@ -231,7 +232,7 @@ extension MapViewController: HandleMapSearch {
     
     func showAlert(place: MKMapItem) {
         let alertController = UIAlertController(title: "Do you what to save this location",
-                                                message: "If you save this location you will be notified when enter the region of a 1Km radius",
+                                                message: "If you save this location you will be notified when enter the region of a 500m radius",
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in

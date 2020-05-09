@@ -51,7 +51,6 @@ class TrackListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          
     }
-
 }
 
 extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -85,13 +84,13 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
         mapVC.currentLoc = location
         let mapView = self.tabBarController?.viewControllers?[0] as? MapViewController
         mapView?.currentLoc = location
-        
+
         // TODO: Pass the selected location to the view controller
 
         let tab = storyboard?.instantiateInitialViewController() as? TabView
         tab?.selectedIndex = 1
         tab?.selectedViewController = tab?.viewControllers?[0]
-        
+
         present(tab!, animated: true, completion: nil)
 
     }
@@ -109,6 +108,18 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
             }
             let managedContext =
                 appDelegate.persistentContainer.viewContext
+
+            let place = places[indexPath.row]
+            let id = "\(String(describing: place.value(forKey: "latitude"))),\(String(describing: place.value(forKey: "latitude")))"
+
+            // Delete the notification from the NotificationCenter
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (notifications) in
+                for notification in notifications {
+                    if notification.identifier == id {
+                        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id])
+                    }
+                }
+            }
 
             managedContext.delete(places[indexPath.row])
             places.remove(at: indexPath.row)
