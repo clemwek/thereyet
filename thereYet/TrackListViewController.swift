@@ -109,7 +109,18 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
             let managedContext =
                 appDelegate.persistentContainer.viewContext
 
-            //TODO: Add delete notification
+            let place = places[indexPath.row]
+            let id = "\(String(describing: place.value(forKey: "latitude"))),\(String(describing: place.value(forKey: "latitude")))"
+
+            // Delete the notification from the NotificationCenter
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (notifications) in
+                for notification in notifications {
+                    if notification.identifier == id {
+                        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id])
+                    }
+                }
+            }
+
             managedContext.delete(places[indexPath.row])
             places.remove(at: indexPath.row)
             tableView.reloadData()
