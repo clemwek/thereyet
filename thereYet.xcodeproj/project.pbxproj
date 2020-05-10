@@ -16,12 +16,13 @@
 		B31BDFD4242F74A90013C8A3 /* thereYetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31BDFD3242F74A90013C8A3 /* thereYetUITests.swift */; };
 		B32A6AE62441AC800068943F /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32A6AE52441AC800068943F /* Places.swift */; };
 		B3642681244E5F1100071E6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3642680244E5F1100071E6B /* SceneDelegate.swift */; };
-		B39082B52440F3CF008A3310 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39082B42440F3CF008A3310 /* LocationSearchTable.swift */; };
+		B39082B52440F3CF008A3310 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39082B42440F3CF008A3310 /* LocationSearchTableViewController.swift */; };
 		B3963CE62455A026009E1094 /* thereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE42455A026009E1094 /* thereYet.xcdatamodeld */; };
 		B3963CE92455A2B4009E1094 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */; };
 		B3963CEA2455A2B4009E1094 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE82455A2B4009E1094 /* Location+CoreDataProperties.swift */; };
 		B3963CEC2455C2B2009E1094 /* CoreDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */; };
-		B3AD92E9245BF54900BEB009 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD92E8245BF54800BEB009 /* TabView.swift */; };
+		B397566B2467CA5D00328661 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B397566A2467CA5D00328661 /* Default-568h@2x.png */; };
+		B3AD92E9245BF54900BEB009 /* TabViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AD92E8245BF54800BEB009 /* TabViewViewController.swift */; };
 		B3B5EF1E2440D2A500F8017B /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,12 +60,13 @@
 		B32A6AE52441AC800068943F /* Places.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		B32A6AE72444DEF50068943F /* thereYet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = thereYet.entitlements; sourceTree = "<group>"; };
 		B3642680244E5F1100071E6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B39082B42440F3CF008A3310 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		B39082B42440F3CF008A3310 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		B3963CE52455A026009E1094 /* thereYet.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = thereYet.xcdatamodel; sourceTree = "<group>"; };
 		B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B3963CE82455A2B4009E1094 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataClient.swift; sourceTree = "<group>"; };
-		B3AD92E8245BF54800BEB009 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		B397566A2467CA5D00328661 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		B3AD92E8245BF54800BEB009 /* TabViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewViewController.swift; sourceTree = "<group>"; };
 		B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +98,7 @@
 		B31BDFA5242F74A60013C8A3 = {
 			isa = PBXGroup;
 			children = (
+				B397566A2467CA5D00328661 /* Default-568h@2x.png */,
 				B3963CE72455A2B4009E1094 /* Location+CoreDataClass.swift */,
 				B3963CE82455A2B4009E1094 /* Location+CoreDataProperties.swift */,
 				B31BDFB0242F74A60013C8A3 /* thereYet */,
@@ -118,20 +121,11 @@
 		B31BDFB0242F74A60013C8A3 /* thereYet */ = {
 			isa = PBXGroup;
 			children = (
+				B39756682467C93D00328661 /* AppDelegate */,
+				B39756672467C8AD00328661 /* Controllers */,
+				B39756692467C9C500328661 /* Models */,
 				B3963CE324559F9E009E1094 /* Resources */,
-				B32A6AE72444DEF50068943F /* thereYet.entitlements */,
-				B31BDFB1242F74A60013C8A3 /* AppDelegate.swift */,
-				B31BDFB5242F74A60013C8A3 /* MapViewController.swift */,
-				B31BDFB7242F74A60013C8A3 /* Main.storyboard */,
-				B39082B42440F3CF008A3310 /* LocationSearchTable.swift */,
-				B31BDFBA242F74A90013C8A3 /* Assets.xcassets */,
-				B31BDFBC242F74A90013C8A3 /* LaunchScreen.storyboard */,
-				B31BDFBF242F74A90013C8A3 /* Info.plist */,
-				B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */,
-				B32A6AE52441AC800068943F /* Places.swift */,
-				B3642680244E5F1100071E6B /* SceneDelegate.swift */,
 				B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */,
-				B3AD92E8245BF54800BEB009 /* TabView.swift */,
 			);
 			path = thereYet;
 			sourceTree = "<group>";
@@ -157,9 +151,42 @@
 		B3963CE324559F9E009E1094 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B32A6AE72444DEF50068943F /* thereYet.entitlements */,
+				B31BDFBC242F74A90013C8A3 /* LaunchScreen.storyboard */,
+				B31BDFB7242F74A60013C8A3 /* Main.storyboard */,
 				B3963CE42455A026009E1094 /* thereYet.xcdatamodeld */,
+				B31BDFBA242F74A90013C8A3 /* Assets.xcassets */,
+				B31BDFBF242F74A90013C8A3 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B39756672467C8AD00328661 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B31BDFB5242F74A60013C8A3 /* MapViewController.swift */,
+				B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */,
+				B39082B42440F3CF008A3310 /* LocationSearchTableViewController.swift */,
+				B3AD92E8245BF54800BEB009 /* TabViewViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B39756682467C93D00328661 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				B31BDFB1242F74A60013C8A3 /* AppDelegate.swift */,
+				B3642680244E5F1100071E6B /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		B39756692467C9C500328661 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B32A6AE52441AC800068943F /* Places.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B31BDFBE242F74A90013C8A3 /* LaunchScreen.storyboard in Resources */,
+				B397566B2467CA5D00328661 /* Default-568h@2x.png in Resources */,
 				B31BDFBB242F74A90013C8A3 /* Assets.xcassets in Resources */,
 				B31BDFB9242F74A60013C8A3 /* Main.storyboard in Resources */,
 			);
@@ -294,7 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B3B5EF1E2440D2A500F8017B /* TrackListViewController.swift in Sources */,
-				B39082B52440F3CF008A3310 /* LocationSearchTable.swift in Sources */,
+				B39082B52440F3CF008A3310 /* LocationSearchTableViewController.swift in Sources */,
 				B31BDFB6242F74A60013C8A3 /* MapViewController.swift in Sources */,
 				B3963CEA2455A2B4009E1094 /* Location+CoreDataProperties.swift in Sources */,
 				B31BDFB2242F74A60013C8A3 /* AppDelegate.swift in Sources */,
@@ -302,7 +330,7 @@
 				B32A6AE62441AC800068943F /* Places.swift in Sources */,
 				B3963CE92455A2B4009E1094 /* Location+CoreDataClass.swift in Sources */,
 				B3642681244E5F1100071E6B /* SceneDelegate.swift in Sources */,
-				B3AD92E9245BF54900BEB009 /* TabView.swift in Sources */,
+				B3AD92E9245BF54900BEB009 /* TabViewViewController.swift in Sources */,
 				B3963CE62455A026009E1094 /* thereYet.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,10 +504,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = thereYet/thereYet.entitlements;
+				CODE_SIGN_ENTITLEMENTS = thereYet/Resources/thereYet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z2TAY6TRFW;
-				INFOPLIST_FILE = thereYet/Info.plist;
+				INFOPLIST_FILE = thereYet/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -495,10 +523,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = thereYet/thereYet.entitlements;
+				CODE_SIGN_ENTITLEMENTS = thereYet/Resources/thereYet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z2TAY6TRFW;
-				INFOPLIST_FILE = thereYet/Info.plist;
+				INFOPLIST_FILE = thereYet/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -516,6 +544,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = thereYetTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -537,6 +566,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = thereYetTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -557,6 +587,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = thereYetUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -576,6 +607,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z2TAY6TRFW;
 				INFOPLIST_FILE = thereYetUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

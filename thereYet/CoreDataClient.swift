@@ -13,12 +13,4 @@ import UIKit
 class CoreDataClient {
 //    let managedContext: NSManagedObjectContext
 
-    init() {
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-    }
 }

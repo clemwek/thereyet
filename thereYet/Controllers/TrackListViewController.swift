@@ -87,7 +87,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
 
         // TODO: Pass the selected location to the view controller
 
-        let tab = storyboard?.instantiateInitialViewController() as? TabView
+        let tab = storyboard?.instantiateInitialViewController() as? TabViewViewController
         tab?.selectedIndex = 1
         tab?.selectedViewController = tab?.viewControllers?[0]
 
