@@ -133,7 +133,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         region.notifyOnEntry = true
         region.notifyOnExit = false
 
-        let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: true)
 
         let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { error in

@@ -125,7 +125,7 @@
 				B39756672467C8AD00328661 /* Controllers */,
 				B39756692467C9C500328661 /* Models */,
 				B3963CE324559F9E009E1094 /* Resources */,
-				B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */,
+				B397566C2467D92B00328661 /* Shared */,
 			);
 			path = thereYet;
 			sourceTree = "<group>";
@@ -164,10 +164,10 @@
 		B39756672467C8AD00328661 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B31BDFB5242F74A60013C8A3 /* MapViewController.swift */,
-				B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */,
 				B39082B42440F3CF008A3310 /* LocationSearchTableViewController.swift */,
+				B31BDFB5242F74A60013C8A3 /* MapViewController.swift */,
 				B3AD92E8245BF54800BEB009 /* TabViewViewController.swift */,
+				B3B5EF1D2440D2A500F8017B /* TrackListViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -187,6 +187,14 @@
 				B32A6AE52441AC800068943F /* Places.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		B397566C2467D92B00328661 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B3963CEB2455C2B2009E1094 /* CoreDataClient.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
