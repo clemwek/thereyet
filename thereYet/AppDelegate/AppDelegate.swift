@@ -6,9 +6,12 @@
 //  Copyright © 2020 ddhwty. All rights reserved.
 //
 
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
+import CoreData
 import UIKit
 import UserNotifications
-import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -41,7 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        MSAppCenter.start("5479b77b-0f09-44ef-bf7e-4d5ea94d5cea", withServices:[
+            MSAnalytics.self,
+            MSCrashes.self
+        ])
         
         // Request for permision to show notifications
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
