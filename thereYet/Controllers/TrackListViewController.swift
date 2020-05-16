@@ -25,12 +25,7 @@ class TrackListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = CoreDataClient.contex
 
         let fetchRequest =
             NSFetchRequest<NSManagedObject>(entityName: "Location")
@@ -102,12 +97,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 
-            guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-                    return
-            }
-            let managedContext =
-                appDelegate.persistentContainer.viewContext
+            let managedContext = CoreDataClient.contex
 
             let place = places[indexPath.row]
             let id = "\(String(describing: place.value(forKey: "latitude"))),\(String(describing: place.value(forKey: "latitude")))"

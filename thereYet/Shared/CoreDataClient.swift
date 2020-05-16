@@ -18,7 +18,6 @@ final class CoreDataClient {
         return persistentContainer.viewContext
     }
 
-    //MARK: Core data setup
     static var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "thereYet")
         container.loadPersistentStores (completionHandler: { (storeDescription, error) in
@@ -41,5 +40,4 @@ final class CoreDataClient {
             }
         }
     }
-    
 }

@@ -9,7 +9,6 @@
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
-import CoreData
 import UIKit
 import UserNotifications
 
@@ -17,31 +16,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     // Create a notification center handler
     let center = UNUserNotificationCenter.current()
-    
-    //MARK: Core data setup
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "thereYet")
-        container.loadPersistentStores (completionHandler: { (storeDescription, error) in
-            print(storeDescription)
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let error = error as NSError
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-    }
-    
+ 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         MSAppCenter.start("5479b77b-0f09-44ef-bf7e-4d5ea94d5cea", withServices:[

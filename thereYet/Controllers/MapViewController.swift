@@ -147,13 +147,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
     func save(place: MKPlacemark) {
 
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
+        let managedContext = CoreDataClient.contex
 
         let entity =
             NSEntityDescription.entity(forEntityName: "Location",
