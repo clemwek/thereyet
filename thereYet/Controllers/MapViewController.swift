@@ -42,11 +42,10 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         gestureRecognizer.delegate = self
         mapView.addGestureRecognizer(gestureRecognizer)
-        
-        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (requests) in
 
+        // Monitor number of notifications set
+        UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (requests) in
             for request in requests {
-                
                 print("------------------->>>>>>>>>>>>>>", request)
                 
                 //                if request.identifier == "IDENTIFIER YOU'RE CHECKING IF EXISTS" {
@@ -113,13 +112,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         locationSearchTable.handleMapSearchDelegate = self
     }
 
-    func addAnnotation(coordinate: CLLocationCoordinate2D) {
-        // Add annotation:
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        mapView.addAnnotation(annotation)
-    }
-
     func setLocalNotification(place: MKMapItem) {
         let content = UNMutableNotificationContent()
         content.title = "You HERE"
@@ -144,24 +136,25 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         })
     }
 
-    func showSelectedLocation(location: CLLocation) {
-        //  Show current location in map
-        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-            CLLocationManager.authorizationStatus() == .authorizedAlways) {
-
-            let region = MKCoordinateRegion(center: location.coordinate,
-                                            latitudinalMeters: 50000,
-                                            longitudinalMeters: 60000)
-            mapView.setCameraBoundary(
-                MKMapView.CameraBoundary(coordinateRegion: region),
-                animated: true)
-
-            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
-            mapView.setCameraZoomRange(zoomRange, animated: true)
-
-            mapView.centerToLocation(currentLoc)
-        }
-    }
+    // This commented out since it is not being used Might be used for locations from the list page.
+//    func showSelectedLocation(location: CLLocation) {
+//        //  Show current location in map
+//        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+//            CLLocationManager.authorizationStatus() == .authorizedAlways) {
+//
+//            let region = MKCoordinateRegion(center: location.coordinate,
+//                                            latitudinalMeters: 50000,
+//                                            longitudinalMeters: 60000)
+//            mapView.setCameraBoundary(
+//                MKMapView.CameraBoundary(coordinateRegion: region),
+//                animated: true)
+//
+//            let zoomRange = MKMapView.CameraZoomRange(maxCenterCoordinateDistance: 200000)
+//            mapView.setCameraZoomRange(zoomRange, animated: true)
+//
+//            mapView.centerToLocation(currentLoc)
+//        }
+//    }
 }
 
 extension MapViewController: CLLocationManagerDelegate {
@@ -175,7 +168,7 @@ extension MapViewController: CLLocationManagerDelegate {
             locationManager?.stopUpdatingLocation()
         }
     }
-    
+
     //Write the didFailWithError method here:
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("There was an error: ", error)
@@ -187,7 +180,7 @@ extension MapViewController: HandleMapSearch {
         // cache the pin
         selectedPin = placemark
         // clear existing pins
-        mapView.removeAnnotations(mapView.annotations)
+//        mapView.removeAnnotations(mapView.annotations)
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
@@ -195,12 +188,13 @@ extension MapViewController: HandleMapSearch {
             let state = placemark.administrativeArea {
             annotation.subtitle = "\(city) \(state)"
         }
+
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
         mapView.setRegion(region, animated: true)
     }
-    
+
     func showAlert(place: MKMapItem) {
         let alertController = UIAlertController(title: "Do you what to save this location?",
                                                 message: "If you save this location you will be notified when enter the region of a 500m radius",
@@ -208,10 +202,10 @@ extension MapViewController: HandleMapSearch {
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             self.setLocalNotification(place: place)
-            self.addAnnotation(coordinate: place.placemark.coordinate)
+            self.dropPinZoomIn(placemark: place.placemark)
             CoreDataClient.save(place: place)
         }))
-        
+
         self.present(alertController, animated: true, completion: nil)
     }
 }

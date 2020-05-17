@@ -31,10 +31,9 @@ extension LocationSearchTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = matchingItems[indexPath.row].placemark
-        handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
-
-        handleMapSearchDelegate?.showAlert(place: matchingItems[indexPath.row])
+        let selectedItem = matchingItems[indexPath.row]
+        handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem.placemark)
+        handleMapSearchDelegate?.showAlert(place: selectedItem)
         dismiss(animated: true, completion: nil)
     }
 }
