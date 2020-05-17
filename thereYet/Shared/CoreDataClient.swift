@@ -8,6 +8,7 @@
 
 import CoreData
 import Foundation
+import MapKit
 import UIKit
 
 final class CoreDataClient {
@@ -38,6 +39,31 @@ final class CoreDataClient {
                 let error = error as NSError
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
+        }
+    }
+}
+
+extension CoreDataClient {
+    static func save(place: MKPlacemark) {
+
+        let managedContext = CoreDataClient.contex
+
+        let entity =
+            NSEntityDescription.entity(forEntityName: "Location",
+                                       in: managedContext)!
+
+        let location = NSManagedObject(entity: entity,
+                                       insertInto: managedContext)
+
+        location.setValue(place.coordinate.latitude, forKeyPath: "latitude")
+        location.setValue(place.coordinate.longitude, forKeyPath: "longitude")
+        //TODO: Fix this
+        location.setValue("place.more", forKey: "placeDescription")
+
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
         }
     }
 }

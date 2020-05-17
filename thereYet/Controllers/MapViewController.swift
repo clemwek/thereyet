@@ -6,7 +6,6 @@
 //  Copyright © 2020 ddhwty. All rights reserved.
 //
 
-import CoreData
 import MapKit
 import UIKit
 import UserNotifications
@@ -145,28 +144,6 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         })
     }
 
-    func save(place: MKPlacemark) {
-
-        let managedContext = CoreDataClient.contex
-
-        let entity =
-            NSEntityDescription.entity(forEntityName: "Location",
-                                       in: managedContext)!
-
-        let location = NSManagedObject(entity: entity,
-                                       insertInto: managedContext)
-
-        location.setValue(place.coordinate.latitude, forKeyPath: "latitude")
-        location.setValue(place.coordinate.longitude, forKeyPath: "longitude")
-        location.setValue(self.parseAddress(selectedItem: place), forKey: "placeDescription")
-
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
-        }
-    }
-
     func showSelectedLocation(location: CLLocation) {
         //  Show current location in map
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
@@ -232,7 +209,7 @@ extension MapViewController: HandleMapSearch {
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             self.setLocalNotification(place: place)
             self.addAnnotation(coordinate: place.placemark.coordinate)
-            self.save(place: place.placemark)
+            CoreDataClient.save(place: place.placemark)
         }))
         
         self.present(alertController, animated: true, completion: nil)
