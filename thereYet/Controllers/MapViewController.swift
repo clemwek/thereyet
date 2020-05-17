@@ -122,7 +122,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
     func setLocalNotification(place: MKMapItem) {
         let content = UNMutableNotificationContent()
-        content.title = "Bingo"
+        content.title = "You HERE"
         content.body = "You have entered \(String(describing: place.name!)) area"
         content.sound = .default
 
@@ -202,41 +202,17 @@ extension MapViewController: HandleMapSearch {
     }
     
     func showAlert(place: MKMapItem) {
-        let alertController = UIAlertController(title: "Do you what to save this location",
+        let alertController = UIAlertController(title: "Do you what to save this location?",
                                                 message: "If you save this location you will be notified when enter the region of a 500m radius",
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Dismis", style: .cancel, handler: nil))
         alertController.addAction(UIAlertAction(title: "Save", style: .default, handler: { (action) in
             self.setLocalNotification(place: place)
             self.addAnnotation(coordinate: place.placemark.coordinate)
-            CoreDataClient.save(place: place.placemark)
+            CoreDataClient.save(place: place)
         }))
         
         self.present(alertController, animated: true, completion: nil)
-    }
-    
-    func parseAddress(selectedItem: MKPlacemark) -> String {
-        // put a space between "4" and "Melrose Place"
-        let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
-        // put a comma between street and city/state
-        let comma = (selectedItem.subThoroughfare != nil || selectedItem.thoroughfare != nil) && (selectedItem.subAdministrativeArea != nil || selectedItem.administrativeArea != nil) ? ", " : ""
-        // put a space between "Washington" and "DC"
-        let secondSpace = (selectedItem.subAdministrativeArea != nil && selectedItem.administrativeArea != nil) ? " " : ""
-        let addressLine = String(
-            format:"%@%@%@%@%@%@%@",
-            // street number
-            selectedItem.subThoroughfare ?? "",
-            firstSpace,
-            // street name
-            selectedItem.thoroughfare ?? "",
-            comma,
-            // city
-            selectedItem.locality ?? "",
-            secondSpace,
-            // state
-            selectedItem.administrativeArea ?? ""
-        )
-        return addressLine
     }
 }
 

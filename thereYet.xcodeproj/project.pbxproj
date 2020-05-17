@@ -15,7 +15,7 @@
 		B31BDFBE242F74A90013C8A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B31BDFBC242F74A90013C8A3 /* LaunchScreen.storyboard */; };
 		B31BDFC9242F74A90013C8A3 /* thereYetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31BDFC8242F74A90013C8A3 /* thereYetTests.swift */; };
 		B31BDFD4242F74A90013C8A3 /* thereYetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31BDFD3242F74A90013C8A3 /* thereYetUITests.swift */; };
-		B32A6AE62441AC800068943F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32A6AE52441AC800068943F /* Location.swift */; };
+		B32A6AE62441AC800068943F /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32A6AE52441AC800068943F /* Place.swift */; };
 		B3642681244E5F1100071E6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3642680244E5F1100071E6B /* SceneDelegate.swift */; };
 		B39082B52440F3CF008A3310 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39082B42440F3CF008A3310 /* LocationSearchTableViewController.swift */; };
 		B3963CE62455A026009E1094 /* thereYet.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3963CE42455A026009E1094 /* thereYet.xcdatamodeld */; };
@@ -67,7 +67,7 @@
 		B31BDFCF242F74A90013C8A3 /* thereYetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = thereYetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31BDFD3242F74A90013C8A3 /* thereYetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thereYetUITests.swift; sourceTree = "<group>"; };
 		B31BDFD5242F74A90013C8A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B32A6AE52441AC800068943F /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		B32A6AE52441AC800068943F /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		B32A6AE72444DEF50068943F /* thereYet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = thereYet.entitlements; sourceTree = "<group>"; };
 		B3642680244E5F1100071E6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B39082B42440F3CF008A3310 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		B39756692467C9C500328661 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B32A6AE52441AC800068943F /* Location.swift */,
+				B32A6AE52441AC800068943F /* Place.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -447,7 +447,7 @@
 				B3963CEA2455A2B4009E1094 /* Location+CoreDataProperties.swift in Sources */,
 				B31BDFB2242F74A60013C8A3 /* AppDelegate.swift in Sources */,
 				B3963CEC2455C2B2009E1094 /* CoreDataClient.swift in Sources */,
-				B32A6AE62441AC800068943F /* Location.swift in Sources */,
+				B32A6AE62441AC800068943F /* Place.swift in Sources */,
 				B3963CE92455A2B4009E1094 /* Location+CoreDataClass.swift in Sources */,
 				B3642681244E5F1100071E6B /* SceneDelegate.swift in Sources */,
 				B3AD92E9245BF54900BEB009 /* TabViewViewController.swift in Sources */,

@@ -44,7 +44,7 @@ final class CoreDataClient {
 }
 
 extension CoreDataClient {
-    static func save(place: MKPlacemark) {
+    static func save(place: MKMapItem) {
 
         let managedContext = CoreDataClient.contex
 
@@ -55,10 +55,10 @@ extension CoreDataClient {
         let location = NSManagedObject(entity: entity,
                                        insertInto: managedContext)
 
-        location.setValue(place.coordinate.latitude, forKeyPath: "latitude")
-        location.setValue(place.coordinate.longitude, forKeyPath: "longitude")
+        location.setValue(place.placemark.coordinate.latitude, forKeyPath: "latitude")
+        location.setValue(place.placemark.coordinate.longitude, forKeyPath: "longitude")
         //TODO: Fix this
-        location.setValue("place.more", forKey: "placeDescription")
+        location.setValue(place.more, forKey: "placeDescription")
 
         do {
             try managedContext.save()
