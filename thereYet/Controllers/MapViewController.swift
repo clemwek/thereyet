@@ -42,6 +42,8 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         gestureRecognizer.delegate = self
         mapView.addGestureRecognizer(gestureRecognizer)
+        
+        loadAnnotations()
 
         // Monitor number of notifications set
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (requests) in
@@ -90,6 +92,52 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
                                                 completionHandler(nil)
                                             }
         })
+    }
+
+    func loadAnnotations() {
+        let places = CoreDataClient.fetch()
+        // with for loop
+//        if let places = places {
+//            for place in places  {
+//                let longitude = place.value(forKey: "Longitude") as! CLLocationDegrees
+//                let latitude = place.value(forKey: "Latitude") as! CLLocationDegrees
+//                let location = CLLocation(latitude: latitude, longitude: longitude)
+//
+//                //            let queue = DispatchQueue(label: "test")
+//                //            queue.async {
+//                //                <#code#>
+//                //            }
+//                lookUpCurrentLocation(location: location) { (placemark) in
+//                    if let placemark = placemark as? MKPlacemark {
+//                        let tPlacemark = placemark
+//                        self.dropPinZoomIn(placemark: placemark)
+//                    }
+//                }
+//            }
+//        }
+        
+        // using map
+        let _ = places?.map({ (place) -> MKMapItem? in
+            let longitude = place.value(forKey: "Longitude") as! CLLocationDegrees
+            let latitude = place.value(forKey: "Latitude") as! CLLocationDegrees
+            let location = CLLocation(latitude: latitude, longitude: longitude)
+            var tPlacemark = MKPlacemark()
+            var mapItem = MKMapItem()
+
+//            let queue = DispatchQueue(label: "test")
+//            queue.async {
+//                <#code#>
+//            }
+            lookUpCurrentLocation(location: location) { (placemark) in
+                if let placemark = placemark as? MKPlacemark {
+                    tPlacemark = placemark
+                    self.dropPinZoomIn(placemark: placemark)
+                    mapItem = MKMapItem(placemark: tPlacemark)
+                }
+            }
+            return mapItem
+        })
+        
     }
 
     func setupSearchTable() {

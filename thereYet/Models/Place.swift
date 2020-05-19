@@ -6,7 +6,6 @@
 //  Copyright © 2020 ddhwty. All rights reserved.
 //
 
-import Foundation
 import MapKit
 
 extension MKMapItem {

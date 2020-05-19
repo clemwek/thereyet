@@ -25,16 +25,8 @@ class TrackListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 
-        let managedContext = CoreDataClient.contex
-
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Location")
-
-        do {
-            places = try managedContext.fetch(fetchRequest)
-            trackTable.reloadData()
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
+        if let places = CoreDataClient.fetch() {
+            self.places = places
         }
     }
 

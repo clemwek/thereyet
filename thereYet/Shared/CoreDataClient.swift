@@ -66,4 +66,18 @@ extension CoreDataClient {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
+
+    static func fetch() -> [NSManagedObject]? {
+        let managedContext = CoreDataClient.contex
+
+        let fetchRequest =
+            NSFetchRequest<NSManagedObject>(entityName: "Location")
+
+        do {
+            return try managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+            return nil
+        }
+    }
 }
