@@ -57,8 +57,8 @@ extension CoreDataClient {
 
         location.setValue(place.placemark.coordinate.latitude, forKeyPath: "latitude")
         location.setValue(place.placemark.coordinate.longitude, forKeyPath: "longitude")
-        //TODO: Fix this
         location.setValue(place.more, forKey: "placeDescription")
+        location.setValue(place.name, forKey: "placeName")
 
         do {
             try managedContext.save()

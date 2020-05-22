@@ -12,7 +12,7 @@ import UserNotifications
 
 
 protocol HandleMapSearch {
-    func dropPinZoomIn(placemark: MKPlacemark)
+    func dropPinZoomIn(placemark: MKPlacemark, name: String)
     func showAlert(place: MKMapItem)
 }
 
@@ -96,48 +96,17 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate {
 
     func loadAnnotations() {
         let places = CoreDataClient.fetch()
-        // with for loop
-//        if let places = places {
-//            for place in places  {
-//                let longitude = place.value(forKey: "Longitude") as! CLLocationDegrees
-//                let latitude = place.value(forKey: "Latitude") as! CLLocationDegrees
-//                let location = CLLocation(latitude: latitude, longitude: longitude)
-//
-//                //            let queue = DispatchQueue(label: "test")
-//                //            queue.async {
-//                //                <#code#>
-//                //            }
-//                lookUpCurrentLocation(location: location) { (placemark) in
-//                    if let placemark = placemark as? MKPlacemark {
-//                        let tPlacemark = placemark
-//                        self.dropPinZoomIn(placemark: placemark)
-//                    }
-//                }
-//            }
-//        }
-        
-        // using map
-        let _ = places?.map({ (place) -> MKMapItem? in
-            let longitude = place.value(forKey: "Longitude") as! CLLocationDegrees
-            let latitude = place.value(forKey: "Latitude") as! CLLocationDegrees
-            let location = CLLocation(latitude: latitude, longitude: longitude)
-            var tPlacemark = MKPlacemark()
-            var mapItem = MKMapItem()
+        if let places = places {
+            for place in places  {
+                let longitude = place.value(forKey: "Longitude") as! CLLocationDegrees
+                let latitude = place.value(forKey: "Latitude") as! CLLocationDegrees
+                let placeName = place.value(forKey: "placeName") as! String
+                let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                let placemark = MKPlacemark(coordinate: location)
 
-//            let queue = DispatchQueue(label: "test")
-//            queue.async {
-//                <#code#>
-//            }
-            lookUpCurrentLocation(location: location) { (placemark) in
-                if let placemark = placemark as? MKPlacemark {
-                    tPlacemark = placemark
-                    self.dropPinZoomIn(placemark: placemark)
-                    mapItem = MKMapItem(placemark: tPlacemark)
-                }
+                dropPinZoomIn(placemark: placemark, name: placeName)
             }
-            return mapItem
-        })
-        
+        }
     }
 
     func setupSearchTable() {
@@ -224,14 +193,15 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: HandleMapSearch {
-    func dropPinZoomIn(placemark: MKPlacemark) {
+    func dropPinZoomIn(placemark: MKPlacemark, name: String = "") {
         // cache the pin
         selectedPin = placemark
+        let newName = name == "" ? placemark.name : name
         // clear existing pins
 //        mapView.removeAnnotations(mapView.annotations)
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.name
+        annotation.title = newName
         if let city = placemark.locality,
             let state = placemark.administrativeArea {
             annotation.subtitle = "\(city) \(state)"
